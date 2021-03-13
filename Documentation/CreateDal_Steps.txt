@@ -1,0 +1,29 @@
+OffStone.Example.Dal
+- Creating a Data Access Layer with Entity Framework Core and Dapper.
+
+1. Create a new .NET Core library project.
+2. Add the following packages via NuGet or Package Manager: Install-Package
+	PM> Install-Package Microsoft.EntityFrameworkCore.SqlServer
+	PM> Install-Package Microsoft.EntityFrameworkCore.Tools
+	PM> Install-Package Microsoft.EntityFrameworkCore.Design
+	PM> Install-Package System.Configuration.ConfigurationManager
+	PM> Install-Package Microsoft.Extensions.Configuration
+	PM> Install-Package Microsoft.Extensions.Configuration.Json
+	PM> Install-Package Dapper
+3. Add a appsettings.json config file, connection string for the use by migrations.
+	Set to copy to output directory.
+4. Create the [NorthwindCopy] database with either Northwind.sql or EF Migrations:
+   PM> Update-Database
+5. Scaffold the entities from DB tables into /Entities folder: 
+	PM> Scaffold-DbContext -Connection "Server=[ADD_SERVERNAME_HERE];Database=Northwind;Trusted_Connection=True;" -Provider "Microsoft.EntityFrameworkCore.SqlServer" -Tables Categories,Customers,Employees,EmployeeTerritories,OrderDetails,Orders,Products,Region,Shippers,Suppliers,Territories -OutputDir "Entities"
+6. Add a generic repository pattern into /Repository folder.
+7. Create the initial migration:
+	PM> Add-Migration InitialMigration -Context NorthwindContext
+8. Create a unit test project to set up integration tests over the DAL and DB.
+9. Set up ConfigureServices() in the test project to configure dependency 
+   injection and connection string from appsettings.json
+10. Create a bunch of integration tests to call Data Access Layer functionality.
+
+
+
+

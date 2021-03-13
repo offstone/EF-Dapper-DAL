@@ -1,0 +1,5 @@
+
+CREATE APPLICATION ROLE [IntegrationTestRole] WITH DEFAULT_SCHEMA = [dbo], PASSWORD = N'IntTest123'
+GO
+ALTER AUTHORIZATION ON SCHEMA::[dbo] TO [IntegrationTestRole]
+GO
